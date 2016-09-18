@@ -8,7 +8,7 @@ A plugin to manage audio mode and volume
 
 - Android
 
-## Methods
+## AUDIO MODE
 - Define the audio mode
 ```javascript
 AudioManagement.setAudioMode(audioMode, onSuccess, onError);
@@ -28,12 +28,39 @@ AudioManagement.getAudioMode(function(result){
 ```
 
 ### The audio mode
-- `SILENT` = 0
-- `VIBRATE` =1
-- `NORMAL` = 2
+- `AudioManagement.AudioMode.SILENT` = 0
+- `AudioManagement.AudioMode.VIBRATE` = 1
+- `AudioManagement.AudioMode.NORMAL` = 2
+
+## VOLUME
+- Set the volume
+```javascript
+AudioManagement.setVolume(type, volume, onSuccess, onError);
+
+// Example
+AudioManagement.setAudioMode(AudioManagement.VolumeType.RING, 10, function(){}, function(){});
+```
+
+- Get the volume of a stream
+```javascript
+AudioManagement.getVolume(type, onSuccess, onError);
+
+AudioManagement.getVolume(AudioManagement.VolumeType.RING, function(result){  
+  console.log('Volume' + result.volume);        // will show '12'
+}, onError);
+```
+
+- Get the max volume of a stream
+```javascript
+AudioManagement.getMaxVolume(type, onSuccess, onError);
+
+AudioManagement.getMaxVolume(AudioManagement.VolumeType.RING, function(result){  
+  console.log('Max volume' + result.maxVolume);        // will show '15'
+}, onError);
+```
 
 ### The volume type
-- `RING` = 0
-- `MUSIC` =1
-- `NOTIFICATION` = 2
-- `SYSTEM` = 3
+- `AudioManagement.VolumeType.RING` = 0
+- `AudioManagement.VolumeType.MUSIC` = 1
+- `AudioManagement.VolumeType.NOTIFICATION` = 2
+- `AudioManagement.VolumeType.SYSTEM` = 3
