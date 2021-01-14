@@ -7,8 +7,8 @@
     <description>A plugin to manage audio mode and volume</description>
     <license>Apache 2.0</license>
     <keywords>cordova,plugin,ringtone mode, volume, audio mode</keywords>
-    <repo>https://github.com/clovelCed/cordova-plugin-audiomanagement</repo>
-    <issue>https://github.com/clovelCed/cordova-plugin-audiomanagement/issues</issue>
+    <repo>https://github.com/ScottWaring/cordova-plugin-audiomanagement</repo>
+    <issue>https://github.com/ScottWaring/cordova-plugin-audiomanagement/issues</issue>
 
     <js-module src="www/AudioManagement.js" name="AudioManagement">
         <clobbers target="AudioManagement" />

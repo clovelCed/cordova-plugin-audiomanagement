@@ -4,11 +4,11 @@
     "cordova_name": "Audio management plugin",
     "description": "A plugin to manage audio mode and volume",
     "license": "Apache 2.0",
-    "repo": "https://github.com/clovelCed/cordova-plugin-audiomanagement",
-    "issue": "https://github.com/clovelCed/cordova-plugin-audiomanagement/issues",
+    "repo": "https://github.com/ScottWaring/cordova-plugin-audiomanagement",
+    "issue": "https://github.com/ScottWaring/cordova-plugin-audiomanagement/issues",
     "repository": {
-      "type": "git",
-      "url": "https://github.com/clovelCed/cordova-plugin-audiomanagement"
+        "type": "git",
+        "url": "https://github.com/ScottWaring/cordova-plugin-audiomanagement"
     },
     "keywords": [
         "cordova",
