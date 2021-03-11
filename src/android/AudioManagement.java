@@ -146,9 +146,6 @@ public class AudioManagement extends CordovaPlugin {
   }
 
   private void setVolume(final int type, final int volume, final CallbackContext callbackContext){
-
-    checkNotificationAccess();
-
     new Runnable(){
       @Override
       public void run() {
@@ -170,23 +167,6 @@ public class AudioManagement extends CordovaPlugin {
         callbackContext.success();
       }
     }.run();
-  }
-
-  private void checkNotificationAccess(){
-    if (Build.VERSION.SDK_INT >= 23 && !hasNotificationPermissionGranted()) {
-      Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-      context.startActivity(intent);
-    }
-}
-
-  private boolean hasNotificationPermissionGranted() {
-    if (Build.VERSION.SDK_INT >= 23) {
-      assert notificationManager != null;
-      return notificationManager.isNotificationPolicyAccessGranted();
-    } else {
-      return true;
-    }
   }
 
   private void getAudioMode(CallbackContext callbackContext) throws JSONException {
