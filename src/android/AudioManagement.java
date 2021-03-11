@@ -152,18 +152,19 @@ public class AudioManagement extends CordovaPlugin {
     new Runnable(){
       @Override
       public void run() {
+        int HIDE_FLAG_UI = 0;
         switch(type){
           case TYPE_RING:
-            manager.setStreamVolume(AudioManager.STREAM_RING, checkVolumeValue(volume, maxVolumeRing), AudioManager.FLAG_SHOW_UI);
+            manager.setStreamVolume(AudioManager.STREAM_RING, checkVolumeValue(volume, maxVolumeRing), HIDE_FLAG_UI);
             break;
           case TYPE_NOTIFICATION:
-            manager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, checkVolumeValue(volume, maxVolumeNotification), AudioManager.FLAG_SHOW_UI);
+            manager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, checkVolumeValue(volume, maxVolumeNotification), HIDE_FLAG_UI);
             break;
           case TYPE_SYSTEM:
-            manager.setStreamVolume(AudioManager.STREAM_SYSTEM, checkVolumeValue(volume, maxVolumeSystem), AudioManager.FLAG_SHOW_UI);
+            manager.setStreamVolume(AudioManager.STREAM_SYSTEM, checkVolumeValue(volume, maxVolumeSystem), HIDE_FLAG_UI);
             break;
           case TYPE_MUSIC:
-            manager.setStreamVolume(AudioManager.STREAM_MUSIC, checkVolumeValue(volume, maxVolumeMusic), AudioManager.FLAG_SHOW_UI);
+            manager.setStreamVolume(AudioManager.STREAM_MUSIC, checkVolumeValue(volume, maxVolumeMusic), HIDE_FLAG_UI);
             break;
         }
         callbackContext.success();
