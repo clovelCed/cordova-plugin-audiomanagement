@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="clovelced-plugin-audiomanagement"
+        id="hrs-plugin-audiomanagement"
         version="1.0.1">
     <name>AudioManagement</name>
     <description>A plugin to manage audio mode and volume</description>
@@ -17,10 +17,10 @@
     <platform name="android">
       <config-file target="res/xml/config.xml" parent="/*">
         <feature name="AudioManagement" >
-          <param name="android-package" value="com.cedricclovel.audiomanagement.AudioManagement"/>
+          <param name="android-package" value="com.hrs.audiomanagement.AudioManagement"/>
         </feature>
       </config-file>
 
-      <source-file src="src/android/AudioManagement.java" target-dir="src/com/cedricclovel/AudioManagement/"/>
+      <source-file src="src/android/AudioManagement.java" target-dir="src/com/hrs/AudioManagement/"/>
     </platform>
 </plugin>

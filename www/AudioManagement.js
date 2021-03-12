@@ -33,9 +33,5 @@ AudioManagement.prototype.getMaxVolume = function(type, onSuccess, onError){
   cordova.exec(onSuccess, onError, 'AudioManagement', 'getMaxVolume', [type]);
 };
 
-AudioManagement.prototype.hasNotificationPermissionGranted = function(){
-  cordova.exec(onSuccess, onError, 'AudioManagement', 'hasNotificationPermissionGranted', []);
-}
-
 var audioManagement = new AudioManagement();
 module.exports = audioManagement;

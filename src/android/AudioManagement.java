@@ -1,4 +1,4 @@
-package com.cedricclovel.audiomanagement;
+package com.hrs.audiomanagement;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
