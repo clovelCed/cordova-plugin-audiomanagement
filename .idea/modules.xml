@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/hrs-plugin-audiomanagement.iml" filepath="$PROJECT_DIR$/hrs-plugin-audiomanagement.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hrs-cordova-plugin-audiomanagement.iml" filepath="$PROJECT_DIR$/hrs-cordova-plugin-audiomanagement.iml" />
     </modules>
   </component>
 </project>

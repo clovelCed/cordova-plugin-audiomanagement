@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="hrs-plugin-audiomanagement"
+        id="hrs-cordova-plugin-audiomanagement"
         version="1.0.1">
     <name>AudioManagement</name>
     <description>A plugin to manage audio mode and volume</description>
     <license>Apache 2.0</license>
     <keywords>cordova,plugin,ringtone mode, volume, audio mode</keywords>
-    <repo>https://github.com/ScottWaring/cordova-plugin-audiomanagement</repo>
-    <issue>https://github.com/ScottWaring/cordova-plugin-audiomanagement/issues</issue>
+    <repo>https://github.com/ScottWaring/hrs-cordova-plugin-audiomanagement</repo>
+    <issue>https://github.com/ScottWaring/hrs-cordova-plugin-audiomanagement/issues</issue>
 
     <js-module src="www/AudioManagement.js" name="AudioManagement">
         <clobbers target="AudioManagement" />
