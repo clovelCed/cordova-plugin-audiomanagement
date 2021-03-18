@@ -1,4 +1,4 @@
-package com.cedricclovel.audiomanagement;
+package com.hrs.audiomanagement;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -6,8 +6,13 @@ import org.json.JSONException;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 import android.R;
+import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
+import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
 
 public class AudioManagement extends CordovaPlugin {
@@ -37,17 +42,22 @@ public class AudioManagement extends CordovaPlugin {
   private static final String KEY_MAX_VOLUME = "maxVolume";
 
   private AudioManager manager;
+  private Context context;
+  private NotificationManager notificationManager;
+
   private int maxVolumeRing;
   private int maxVolumeSystem;
   private int maxVolumeNotification;
   private int maxVolumeMusic;
 
   public void pluginInitialize(){
-      this.manager = (AudioManager) this.cordova.getActivity().getSystemService(Context.AUDIO_SERVICE);
-      this.maxVolumeRing = manager.getStreamMaxVolume(AudioManager.STREAM_RING);
-      this.maxVolumeNotification = manager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
-      this.maxVolumeSystem = manager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
-      this.maxVolumeMusic = manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+    this.manager = (AudioManager) this.cordova.getActivity().getSystemService(Context.AUDIO_SERVICE);
+    this.maxVolumeRing = manager.getStreamMaxVolume(AudioManager.STREAM_RING);
+    this.maxVolumeNotification = manager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
+    this.maxVolumeSystem = manager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
+    this.maxVolumeMusic = manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+    this.context = this.cordova.getActivity().getApplicationContext();
+    this.notificationManager = (NotificationManager) this.context.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
   }
 
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -85,9 +95,9 @@ public class AudioManagement extends CordovaPlugin {
       }
     } else if(ACTION_SET_VOLUME.equals(action)){
 
-        final int type = args.getInt(0);
-        final int volume = args.getInt(1);
-        setVolume(type, volume, callbackContext);
+      final int type = args.getInt(0);
+      final int volume = args.getInt(1);
+      setVolume(type, volume, callbackContext);
 
     }  else if(ACTION_GET_MAX_VOLUME.equals(action)){
 
@@ -128,35 +138,35 @@ public class AudioManagement extends CordovaPlugin {
         volume = manager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
         break;
       case TYPE_SYSTEM:
-          volume = manager.getStreamVolume(AudioManager.STREAM_SYSTEM);
-          break;
+        volume = manager.getStreamVolume(AudioManager.STREAM_SYSTEM);
+        break;
     }
 
     return volume;
   }
 
   private void setVolume(final int type, final int volume, final CallbackContext callbackContext){
-
     new Runnable(){
-            @Override
-            public void run() {
-              switch(type){
-                case TYPE_RING:
-                  manager.setStreamVolume(AudioManager.STREAM_RING, checkVolumeValue(volume, maxVolumeRing), AudioManager.FLAG_SHOW_UI);
-                  break;
-                case TYPE_NOTIFICATION:
-                    manager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, checkVolumeValue(volume, maxVolumeNotification), AudioManager.FLAG_SHOW_UI);
-                    break;
-                case TYPE_SYSTEM:
-                    manager.setStreamVolume(AudioManager.STREAM_SYSTEM, checkVolumeValue(volume, maxVolumeSystem), AudioManager.FLAG_SHOW_UI);
-                    break;
-                case TYPE_MUSIC:
-                    manager.setStreamVolume(AudioManager.STREAM_MUSIC, checkVolumeValue(volume, maxVolumeMusic), AudioManager.FLAG_SHOW_UI);
-                    break;
-              }
-              callbackContext.success();
-            }
-        }.run();
+      @Override
+      public void run() {
+        int HIDE_FLAG_UI = 0;
+        switch(type){
+          case TYPE_RING:
+            manager.setStreamVolume(AudioManager.STREAM_RING, checkVolumeValue(volume, maxVolumeRing), HIDE_FLAG_UI);
+            break;
+          case TYPE_NOTIFICATION:
+            manager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, checkVolumeValue(volume, maxVolumeNotification), HIDE_FLAG_UI);
+            break;
+          case TYPE_SYSTEM:
+            manager.setStreamVolume(AudioManager.STREAM_SYSTEM, checkVolumeValue(volume, maxVolumeSystem), HIDE_FLAG_UI);
+            break;
+          case TYPE_MUSIC:
+            manager.setStreamVolume(AudioManager.STREAM_MUSIC, checkVolumeValue(volume, maxVolumeMusic), HIDE_FLAG_UI);
+            break;
+        }
+        callbackContext.success();
+      }
+    }.run();
   }
 
   private void getAudioMode(CallbackContext callbackContext) throws JSONException {
@@ -216,25 +226,25 @@ public class AudioManagement extends CordovaPlugin {
         max = manager.getStreamMaxVolume(AudioManager.STREAM_RING);
         break;
       case TYPE_NOTIFICATION:
-          max = manager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
-          break;
+        max = manager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
+        break;
       case TYPE_SYSTEM:
-          max = manager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
-          break;
+        max = manager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
+        break;
       case TYPE_MUSIC:
-          max = manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-          break;
+        max = manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        break;
     }
 
     return max;
   }
 
   /**
-  *  Check if the volume is not higher than max value
-  * @param sourceVolume
-  * @param maxVolume
-  * @return
-  */
+   *  Check if the volume is not higher than max value
+   * @param sourceVolume
+   * @param maxVolume
+   * @return
+   */
   private int checkVolumeValue(int sourceVolume, int maxVolume){
 
     int volume = sourceVolume;
