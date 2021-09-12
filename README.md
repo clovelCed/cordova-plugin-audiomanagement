@@ -38,7 +38,7 @@ AudioManagement.getAudioMode(function(result){
 AudioManagement.setVolume(type, volume, onSuccess, onError);
 
 // Example
-AudioManagement.setAudioMode(AudioManagement.VolumeType.RING, 10, function(){}, function(){});
+AudioManagement.setVolume(AudioManagement.VolumeType.RING, 10, function(){}, function(){});
 ```
 
 - Get the volume of a stream
